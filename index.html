@@ -20,6 +20,7 @@
             line-height: 1.25;
             background-repeat: no-repeat;
             color: #000000;
+            overflow: hidden;
             margin: 0; /* 清除預設 margin */
             background-size: cover;
         }
@@ -75,7 +76,7 @@
             display: block; /* 讓按鈕成為 block-level 元素，使其寬度充滿父元素 */
             margin-bottom: 10px; /* 添加底部間距 */
             position: fixed;
-            top: 90%;
+            top: 35%;
             left: 50%;
             transform: translate(-50%, -50%); /* 使按鈕居中 */
         }
@@ -117,14 +118,6 @@
         .options label {
             margin: 0 10px;
         }
-
-        #result {
-                maroverflow: hidden;
-                gin: 0 auto; /* 水平居中 */
-                background-size: cover;
-                background-repeat: no-repeat;
-                height: 100%;
-                min-width: 100%;
 
     }
             
@@ -213,9 +206,9 @@
 
     var questionBackgrounds = [
         'https://i.imgur.com/vt8GaIt.png',
-        'https://i.imgur.com/nqTrFmL.png',
-        'https://i.imgur.com/Vw1t4IW.png',
-        'https://i.imgur.com/yCzWwRy.png'
+        'https://i.imgur.com/sBMrokV.png',
+        'https://i.imgur.com/GT43lLt.png',
+        'https://i.imgur.com/RXC9uX2.png'
     ];
 
     function hideQuizTitle() {
@@ -226,6 +219,34 @@
     function startTest() {
         hideQuizTitle();
         document.getElementById('startTestButtonContainer').style.display = 'none';
+
+        // 檢查是手機版還是電腦版
+        if (isMobile()) {
+            showMobileQuestion(1);
+        } else {
+            showDesktopQuestion(1);
+        }
+    }
+
+    // 檢測是否為手機版
+    function isMobile() {
+        return window.innerWidth <= 600; // 假設寬度小於等於 600px 為手機版
+    }
+
+    function showMobileQuestion(questionNumber) {
+    var currentQuestionElement = document.getElementById('question' + questionNumber);
+    currentQuestionElement.style.display = 'block';
+
+    // 隱藏其他問題
+    for (var i = 1; i <= 4; i++) {
+        if (i !== questionNumber) {
+            var question = document.getElementById('question' + i);
+            question.style.display = 'none';
+        }
+    }
+
+    setMobileQuestionBackground(questionNumber - 1);
+}
 
     function showDesktopQuestion(questionNumber) {
         showQuestion(questionNumber, setQuestionBackground);
@@ -244,6 +265,24 @@
         }
 
         setBackgroundFunction(questionNumber - 1);
+    }
+
+    function setMobileQuestionBackground(questionIndex) {
+        // 修改為手機版的背景圖片路徑
+        var currentQuestion = 1;
+
+        var mobileBackgrounds = [
+            'https://i.imgur.com/2iZ0YUT.png',
+            'https://i.imgur.com/YB1nMhS.png',
+            'https://i.imgur.com/Vw1t4IW.png',
+            'https://i.imgur.com/nqTrFmL.png'
+        ];
+
+        questionIndex = Math.min(Math.max(questionIndex, 0), mobileBackgrounds.length - 1);
+
+        document.body.style.backgroundImage = "url('" + mobileBackgrounds[questionIndex] + "')";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
     }
 
     function setQuestionBackground(questionIndex) {
