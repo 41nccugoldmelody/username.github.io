@@ -76,7 +76,7 @@
             display: block; /* 讓按鈕成為 block-level 元素，使其寬度充滿父元素 */
             margin-bottom: 10px; /* 添加底部間距 */
             position: fixed;
-            top: 35%;
+            top: 70%;
             left: 50%;
             transform: translate(-50%, -50%); /* 使按鈕居中 */
         }
@@ -344,8 +344,13 @@
     }
 
         function displayResult(score) {
-        var resultDiv = document.getElementById('result');
-        var resultImage = document.createElement('img');
+        // 修改背景為全白
+            document.body.style.backgroundImage = "url('https://example.com/white-background.jpg')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundRepeat = "no-repeat";
+
+    var resultDiv = document.getElementById('result');
+    var resultImage = document.createElement('img');
         
         if (score > 2000 && score !== 2002 && score !== 2020 && score !== 2200) {
             resultImage.src = 'https://i.imgur.com/w7B7RwF.jpg';
