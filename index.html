@@ -76,7 +76,7 @@
             display: block; /* 讓按鈕成為 block-level 元素，使其寬度充滿父元素 */
             margin-bottom: 10px; /* 添加底部間距 */
             position: fixed;
-            top: 70%;
+            top: 35%;
             left: 50%;
             transform: translate(-50%, -50%); /* 使按鈕居中 */
         }
@@ -130,7 +130,7 @@
     <h1></h1>
 
   <div id="startTestButtonContainer">
-        <button onclick="showNextQuestion(1)">開始測試</button>
+        <button onclick="startTest()">開始測試</button>
     </div>
 
 
@@ -206,9 +206,9 @@
 
     var questionBackgrounds = [
         'https://i.imgur.com/vt8GaIt.png',
-        'https://i.imgur.com/nqTrFmL.png',
-        'https://i.imgur.com/Vw1t4IW.png',
-        'https://i.imgur.com/yCzWwRy.png'
+        'https://i.imgur.com/sBMrokV.png',
+        'https://i.imgur.com/GT43lLt.png',
+        'https://i.imgur.com/RXC9uX2.png'
     ];
 
     function hideQuizTitle() {
@@ -272,10 +272,10 @@
         var currentQuestion = 1;
 
         var mobileBackgrounds = [
-            'https://i.imgur.com/vt8GaIt.png',
-            'https://i.imgur.com/nqTrFmL.png',
+            'https://i.imgur.com/2iZ0YUT.png',
+            'https://i.imgur.com/YB1nMhS.png',
             'https://i.imgur.com/Vw1t4IW.png',
-            'https://i.imgur.com/yCzWwRy.png''
+            'https://i.imgur.com/nqTrFmL.png'
         ];
 
         questionIndex = Math.min(Math.max(questionIndex, 0), mobileBackgrounds.length - 1);
