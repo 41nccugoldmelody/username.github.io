@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金日冒險物語</title>
+
+ <style>
+        @font-face {
+            font-family: 'BoutiqueBitmap9x9_Bold';
+            src: url('fonts/BoutiqueBitmap9x9_Bold_1.7.ttf') format('truetype');
+        }
+     
+        /* 公共樣式，適用於電腦版和手機版 */
+        body {
+            font-family: 'BoutiqueBitmap9x9_Bold', sans-serif;
+            letter-spacing: 3px;
+            line-height: 1.25;
+            background-repeat: no-repeat;
+            color: #000000;
+            margin: 0; /* 清除預設 margin */
+            background-size: cover;
+        }
+
+        /* 電腦版樣式 */
+        @media only screen and (min-width: 601px) {
+            body {
+                background-image: url('https://i.imgur.com/2mskyjN.jpg'); /* 電腦版背景圖片 URL */
+                padding: 20px; /* 調整電腦版 padding */
+            }
+            
+            img {
+               max-width: 100%;
+               height: auto;
+            }
+
+            body {
+                white-space: nowrap; /* 不換行 */
+            }
+
+                h1,
+                .question p,
+                .options label,
+                #result {
+                  white-space: nowrap; /* 不換行 */
+        }
+            body {
+                   font-family: 'BoutiqueBitmap9x9_Bold', sans-serif;
+                   letter-spacing: 3px;
+                   line-height: 1.25;
+                   /* 使用字體，如果未能載入，則使用後面的通用字體 */
+        }
+        
+            /* 電腦版文字位置和選項排列方式 */
+            button {
+            font-family: 'BoutiqueBitmap9x9_Bold', sans-serif;
+            /* 使用你想要的字體，如果未能載入，則使用後面的通用字體 */
+            font-size: 16px; /* 設定字體大小，可以根據需要調整 */
+            /* 其他按鈕的樣式設定 */
+            padding: 12px 20px; /* 調整按鈕內邊距 */
+            background-color: #ffffff; /* 按鈕背景色 */
+            color:  #000000; /* 按鈕文字顏色 */
+            border: none; /* 移除按鈕邊框 */
+            border-radius: 5px; /* 設定按鈕邊角半徑 */
+            cursor: pointer;
+        }
+
+        #startTestButtonContainer button {
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 0 auto; /* 水平居中 */
+            display: block; /* 讓按鈕成為 block-level 元素，使其寬度充滿父元素 */
+            margin-bottom: 10px; /* 添加底部間距 */
+            position: fixed;
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* 使按鈕居中 */
+        }
+
+        .question {
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .question p {
+            font-size: 20px; /* 調整文字大小 */
+            color: #555; /* 調整文字顏色 */
+            margin-bottom: 10px; /* 調整底部間距 */
+            position: fixed;
+            top: 68%;
+            left: 50%; 
+            transform: translateX(-50%); /* 使文字居中 */
+        }
+
+        .question button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            position: fixed;
+            bottom: 8%; /* 距離底部的位置 */
+            right: 10%;
+            transform: translateX(50%); /* 使按鈕居中 */
+        }
+
+        .options {
+            display: flex;
+            position: fixed;
+            font-size: 20px;
+            top: 85%;
+            left: 50%; 
+            transform: translateX(-50%); /* 使選項居中 */
+        }
+
+        .options label {
+            margin: 0 10px;
+        }
+
+        #result {
+                maroverflow: hidden;
+                gin: 0 auto; /* 水平居中 */
+                background-size: cover;
+                background-repeat: no-repeat;
+                height: 100%;
+                min-width: 100%;
+
+    }
+            
+    </style>
+
+</head>
+
+<body>
+ <div id="quizContainer">
+    <h1></h1>
+
+  <div id="startTestButtonContainer">
+        <button onclick="startTest()">開始測試</button>
+    </div>
+
+
+    <div class="question" id="question1">
+    <noscript><iframe src="https://i.imgur.com/vt8GaIt.png" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+        <p>背上你的行囊，現在你面前有一個任意門，你想去哪裡？</p>
+        <div class="options">
+            <label><input type="radio" name="q1" value="100"> B612星球</label>
+            <label><input type="radio" name="q1" value="1000"> 桃花源</label>
+            <label><input type="radio" name="q1" value="1"> 亞特蘭提斯</label>
+            <label><input type="radio" name="q1" value="10"> 月球的背面</label>
+        </div>
+       <button onclick="showNextQuestion('question2')">下一題</button>
+    </div>
+
+    <div class="question" id="question2">
+        <noscript><iframe src="https://i.imgur.com/YB1nMhS.png" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+
+            <p>路途中突然有人塞給你一樣東西，並告訴你：「帶上這個東西吧，它對你很有幫助。」你覺得會是什麼？
+</p>
+        <div class="options">
+            <label><input type="radio" name="q2" value="1"> 青花瓷</label>
+            <label><input type="radio" name="q2" value="1000"> 能量藥水</label>
+            <label><input type="radio" name="q2" value="100"> 魔鏡</label>
+            <label><input type="radio" name="q2" value="10"> 紫水晶</label>
+        </div>
+      <button onclick="showNextQuestion('question3')">下一題</button>
+    </div>
+  
+   <div class="question" id="question3">
+
+    <noscript><iframe src="https://i.imgur.com/Vw1t4IW.png" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
+
+        <p>你的包包裝得滿滿的，希望能找個地方休息，這時看見前方有一棵大樹，你驚呼：上面居然長滿了_____！
+</p>
+        <div class="options">
+            <label><input type="radio" name="q3" value="1000"> 長生不老的仙丹</label>
+            <label><input type="radio" name="q3" value="100"> 聖誕老公公的拐杖糖</label>
+            <label><input type="radio" name="q3" value="10"> 瑪莉歐的無敵星星</label>
+            <label><input type="radio" name="q3" value="1"> 海盜的藏寶圖</label>
+        </div>
+     <button onclick="showNextQuestion('question4')">下一題</button>
+    </div>
+  
+   <div class="question" id="question4">
+
+    <noscript><iframe src="https://i.imgur.com/nqTrFmL.png" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
+
+        <p>旅程即將結束，現在可以選擇一項交通工具回到現實，你想選哪一個？</p>
+        <div class="options">
+            <label><input type="radio" name="q4" value="100"> 仙杜瑞拉的南瓜馬車</label>
+            <label><input type="radio" name="q4" value="10"> 蝙蝠俠的跑車</label>
+            <label><input type="radio" name="q4" value="1"> 阿拉丁的魔毯</label>
+            <label><input type="radio" name="q4" value="1000"> 侏羅紀公園的翼龍</label>
+
+        </div>
+     <button onclick="completeTest()">完成測驗</button>
+    </div>
+
+  <div class="result" id="result">
+         <noscript><iframe src="https://i.imgur.com/yCzWwRy.png" height="0" width="0"
+        style="display:none;visibility:hidden"></iframe></noscript>
+
+        </div>
+
+<script>
+    var currentQuestion = 1;
+
+    var questionBackgrounds = [
+        'https://i.imgur.com/vt8GaIt.png',
+        'https://i.imgur.com/nqTrFmL.png',
+        'https://i.imgur.com/Vw1t4IW.png',
+        'https://i.imgur.com/yCzWwRy.png'
+    ];
+
+    function hideQuizTitle() {
+        // 隱藏運勢測驗標題
+        document.querySelector('#quizContainer h1').style.display = 'none';
+    }
+
+    function startTest() {
+        hideQuizTitle();
+        document.getElementById('startTestButtonContainer').style.display = 'none';
+
+    function showDesktopQuestion(questionNumber) {
+        showQuestion(questionNumber, setQuestionBackground);
+    }
+
+    function showQuestion(questionNumber, setBackgroundFunction) {
+        var currentQuestionElement = document.getElementById('question' + questionNumber);
+        currentQuestionElement.style.display = 'block';
+
+        // 隱藏其他問題
+        for (var i = 1; i <= 4; i++) {
+            if (i !== questionNumber) {
+                var question = document.getElementById('question' + i);
+                question.style.display = 'none';
+            }
+        }
+
+        setBackgroundFunction(questionNumber - 1);
+    }
+
+    function setQuestionBackground(questionIndex) {
+        questionIndex = Math.min(Math.max(questionIndex, 0), questionBackgrounds.length - 1);
+
+        document.body.style.backgroundImage = "url('" + questionBackgrounds[questionIndex] + "')";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+    }
+
+    function showNextQuestion(nextQuestionId) {
+        // 檢查是否有選擇答案
+        var selectedAnswer = document.querySelector('input[name="q' + currentQuestion + '"]:checked');
+
+        if (!selectedAnswer) {
+            alert('請選擇一個答案！');
+            return;
+        }
+
+        // 隱藏目前的問題
+        document.getElementById('question' + currentQuestion).style.display = 'none';
+
+        // 顯示下一個問題
+        document.getElementById(nextQuestionId).style.display = 'block';
+
+        // 切換背景圖片
+        currentQuestion++;
+        setQuestionBackground(currentQuestion - 1);
+    }
+
+    function calculateScore() {
+        hideQuizTitle();
+        var score = 0;
+        var answers = document.querySelectorAll('input[name^="q"]:checked');
+
+        for (var i = 0; i < answers.length; i++) {
+            score += parseInt(answers[i].value);
+        }
+
+        displayResult(score);
+    }
+
+    function completeTest() {
+        hideQuizTitle();
+        // 計算分數前，檢查最後一題是否有選擇答案
+        var selectedAnswer = document.querySelector('input[name="q4"]:checked');
+
+        if (!selectedAnswer) {
+            alert('請選擇一個答案！');
+            return;
+        }
+
+        // 隱藏目前的問題
+        document.getElementById('question' + currentQuestion).style.display = 'none';
+
+        // 顯示測驗結果
+        calculateScore();
+        document.getElementById('result').style.display = 'block';
+    }
+
+        function displayResult(score) {
+        var resultDiv = document.getElementById('result');
+        var resultImage = document.createElement('img');
+        
+        if (score > 2000 && score !== 2002 && score !== 2020 && score !== 2200) {
+            resultImage.src = 'https://i.imgur.com/w7B7RwF.jpg';
+            resultImage.alt = 'Healthy Result';
+        } else if ([400, 1300, 310, 301, 1210, 1201, 211].includes(score)) {
+            resultImage.src = 'https://i.imgur.com/TNloFHq.jpg';
+            resultImage.alt = 'Love Result';
+        } else if ([40, 31, 130, 1030, 121, 1021, 1120].includes(score)) {
+            resultImage.src = 'https://i.imgur.com/oEnG2wT.jpg';
+            resultImage.alt = 'Career Result';
+        } else if ([4, 13, 103, 1003, 112, 1012, 1102].includes(score)) {
+            resultImage.src = 'https://i.imgur.com/lV1BvmE.jpg';
+            resultImage.alt = 'Wealth Result';
+        } else if ([2002, 2020, 2200, 220, 202, 22, 1111].includes(score)) {
+            resultImage.src = 'https://i.imgur.com/jua4LSj.jpg';
+            resultImage.alt = 'Contradiction Result';
+        }
+
+        resultImage.style.maxWidth = '100%';
+        resultImage.style.height = 'auto';
+            
+        resultDiv.innerHTML = ''; // 清空結果區域的內容
+        resultDiv.appendChild(resultImage); // 將圖片元素添加到結果區域
+   }
+</script>
+
+</body>
+</html>
